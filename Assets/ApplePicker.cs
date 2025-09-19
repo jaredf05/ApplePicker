@@ -4,15 +4,24 @@ using JetBrains.Annotations;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro; // Fixed my issue of RoundText not attatching
+
+
 
 public class ApplePicker : MonoBehaviour
 {
     [Header("Inscribed")]
     public GameObject basketPrefab;
-    public int numBaskets = 3;
+    public int numBaskets = 4;
     public float basketBottomY = -14f;
     public float basketSpacingY = 2f;
     public List<GameObject> basketList;
+    public TMP_Text roundText;     // Drag RoundText here in Inspector
+    public int round = 1;      // Start at round 1
+    public int maxRounds = 4;  // Goes up to round 4
+    public GameObject restartButton;   // Drag the RestartButton here in Inspector
+
 
     void Start()
     {
@@ -45,11 +54,43 @@ public class ApplePicker : MonoBehaviour
         basketList.RemoveAt(basketIndex);
         Destroy(basketGO);
 
+        NextRound();
+
         //If there are no Baskets left, restart the game
         if (basketList.Count == 0)
         {
-            SceneManager.LoadScene("_Scene_0");
+            round = maxRounds + 1;   // Go past the last round
+            UpdateRoundText();
+            Time.timeScale = 0f;     // Pause the game
+        }
+        // Show restart button
+        if (restartButton != null)
+        {
+            restartButton.SetActive(true);
         }
 
     }
+
+    public void UpdateRoundText()
+    {
+        if (round <= maxRounds)
+            roundText.text = "Round " + round;
+        else
+            roundText.text = "Game Over";
+    }
+
+    public void NextRound()
+    {
+        round++;
+        UpdateRoundText();
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("_Scene_0");
+    }
+
+
+
 }

@@ -7,6 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Basket : MonoBehaviour
 {
     public ScoreCounter scoreCounter;
+    public static bool gameStarted = false;  // New static flag for basket on StartScreen
     void Start()
     {
         GameObject scoreGO = GameObject.Find("ScoreCounter");
@@ -16,6 +17,10 @@ public class Basket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+         // Stop basket from moving until the game starts
+        if (!gameStarted) return;
+
         //Get the current screen position of the mouse from input
         Vector3 mousePos2D = Input.mousePosition;
 

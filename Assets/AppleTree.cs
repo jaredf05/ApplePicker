@@ -21,6 +21,11 @@ public class AppleTree : MonoBehaviour {
 
     //Seconds between Apples instantiations
     public float appleDropDelay = 1f;
+
+    public GameObject branchPrefab;
+    public float branchDropChance = 0.1f;
+
+
     void Start()
     {
         //Start dropping apples
@@ -29,10 +34,24 @@ public class AppleTree : MonoBehaviour {
 
     void DropApple()
     {
-        GameObject apple = Instantiate<GameObject>(applePrefab);
-        apple.transform.position = transform.position;
+        GameObject obj;
+
+        // Random chance to drop a branch instead of an apple
+        if (Random.value < branchDropChance)  // e.g., 0.1 = 10% chance
+        {
+            obj = Instantiate<GameObject>(branchPrefab);
+        }
+        else
+        {
+            obj = Instantiate<GameObject>(applePrefab);
+        }
+
+        obj.transform.position = transform.position;
+
+        // Keep calling this method repeatedly
         Invoke("DropApple", appleDropDelay);
     }
+
 
     // Update is called once per frame
     void Update()
