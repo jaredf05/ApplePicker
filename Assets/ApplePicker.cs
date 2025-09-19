@@ -34,19 +34,23 @@ public class ApplePicker : MonoBehaviour
             tBasketGO.transform.position = pos;
             basketList.Add(tBasketGO);
         }
+
+        UpdateRoundText();
+        if (restartButton != null)
+            restartButton.SetActive(false); // Hidden at start
     }
 
     public void AppleMissed()
     {
-        //Destroy all of the falling Apples
+        // Destroy all of the falling Apples
         GameObject[] appleArray = GameObject.FindGameObjectsWithTag("Apple");
         foreach (GameObject tempGO in appleArray)
         {
             Destroy(tempGO);
         }
 
-        //Destroy one of the Baskets
-        //Get the index of the last Basket in basektList
+        // Destroy one of the Baskets
+        // Get the index of the last Basket in basektList
         int basketIndex = basketList.Count - 1;
         //Get a referece to that Basekt GameObject;
         GameObject basketGO = basketList[basketIndex];
@@ -56,17 +60,10 @@ public class ApplePicker : MonoBehaviour
 
         NextRound();
 
-        //If there are no Baskets left, restart the game
+        // If there are no Baskets left, restart the game
         if (basketList.Count == 0)
         {
-            round = maxRounds + 1;   // Go past the last round
-            UpdateRoundText();
-            Time.timeScale = 0f;     // Pause the game
-        }
-        // Show restart button
-        if (restartButton != null)
-        {
-            restartButton.SetActive(true);
+            GameOver();
         }
 
     }
@@ -85,12 +82,20 @@ public class ApplePicker : MonoBehaviour
         UpdateRoundText();
     }
 
+    public void GameOver()
+    {
+        round = maxRounds + 1;
+        UpdateRoundText();
+        Time.timeScale = 0f;
+
+        if (restartButton != null)
+            restartButton.SetActive(true);
+    }
+
     public void RestartGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("_Scene_0");
     }
-
-
 
 }

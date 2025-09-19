@@ -8,6 +8,7 @@ public class Basket : MonoBehaviour
 {
     public ScoreCounter scoreCounter;
     public static bool gameStarted = false;  // New static flag for basket on StartScreen
+
     void Start()
     {
         GameObject scoreGO = GameObject.Find("ScoreCounter");
@@ -47,7 +48,13 @@ public class Basket : MonoBehaviour
             //Increase the score
             scoreCounter.score += 100;
             HighScore.TRY_SET_HIGH_SCORE(scoreCounter.score);
+        } else if (collidedWith.CompareTag("Branch"))
+        {
+           Destroy(collidedWith);
+
+            // Tell ApplePicker it’s Game Over
+            ApplePicker apScript = Camera.main.GetComponent<ApplePicker>();
+            apScript.GameOver();
         }
     }
 }
-  

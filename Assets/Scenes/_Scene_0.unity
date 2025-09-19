@@ -1692,6 +1692,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6018937218148973653, guid: 5479a42ff5a07f34e8cd1baab6cf942a, type: 3}
+      propertyPath: branchPrefab
+      value: 
+      objectReference: {fileID: 1322095859660978039, guid: 2697b791cd8f8034abb2d61d9c17a18f, type: 3}
     - target: {fileID: 7464293924557943718, guid: 5479a42ff5a07f34e8cd1baab6cf942a, type: 3}
       propertyPath: m_Name
       value: AppleTree
