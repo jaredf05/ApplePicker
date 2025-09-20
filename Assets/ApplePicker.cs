@@ -17,10 +17,10 @@ public class ApplePicker : MonoBehaviour
     public float basketBottomY = -14f;
     public float basketSpacingY = 2f;
     public List<GameObject> basketList;
-    public TMP_Text roundText;     // Drag RoundText here in Inspector
+    public TMP_Text roundText;  
     public int round = 1;      // Start at round 1
     public int maxRounds = 4;  // Goes up to round 4
-    public GameObject restartButton;   // Drag the RestartButton here in Inspector
+    public GameObject restartButton; 
 
 
     void Start()

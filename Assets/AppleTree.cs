@@ -37,7 +37,7 @@ public class AppleTree : MonoBehaviour {
         GameObject obj;
 
         // Random chance to drop a branch instead of an apple
-        if (Random.value < branchDropChance)  // e.g., 0.1 = 10% chance
+        if (Random.value < branchDropChance)  //  0.1 = 10% chance
         {
             obj = Instantiate<GameObject>(branchPrefab);
         }
